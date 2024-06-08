@@ -1,0 +1,10 @@
+<odoo>
+    <data noupdate="1">
+        <record id="seq_form_sekolah" model="ir.sequence">
+            <field name="name">Convert</field>
+                <field name="code">convert.file</field>
+                <!--  <field name="prefix">TC/%(year)s/%(month)s/</field>  -->
+            <field name="padding">1</field>
+        </record>
+    </data>
+</odoo>

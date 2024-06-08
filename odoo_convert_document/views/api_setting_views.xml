@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <record id="api_setting_form_action" model="ir.actions.act_window">
+            <field name="name">API Setting</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">api.settings</field>
+            <field name="view_mode">tree,form</field>
+            <!-- <field name="domain">[('state','in',('purchase', 'done'))]</field> -->
+            <!-- <field name="search_view_id" ref="purchase_order_view_search"/> -->
+            <!-- <field name="context">{}</field> -->
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                No Converted File found. Let's create one!
+              </p><p>
+                This module has been integrated with the API from the www.convertapi.com website. This module is still in development stage but can be used for several formats only.
+              </p>
+            </field>
+        </record>
+
+        <record id="api_setting_form" model="ir.ui.view">
+            <field name="name">api.setting.form</field>
+            <field name="model">api.settings</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div>
+                            <field name="percentage" widget="progressbar"/>
+                        </div>
+                        <group string="API Secret Key" col="1">
+                            <h1>
+                                <field name="secret_key" attrs="{'readonly': [('is_active', '=', True)]}"/>
+                            </h1>
+                        </group>
+                        <group name="form_api_setting" col="2">
+                            <group string="User Information">
+                                <field name="name" readonly="1"/>
+                                <field name="email" readonly="1"/>
+                                <field name="is_active" readonly="1" invisible="1"/>
+                            </group>
+                            <group string="API Information">
+                                <field name="id_account" readonly="1"/>
+                                <field name="convert_limit" readonly="1"/>
+                                <field name="max_workers" readonly="1"/>
+                            </group>
+                        </group>
+                        <button string="Connect" name="action_connect" type="object" class="btn-danger" attrs="{'invisible': [('state', '!=', 'non_active')]}"/>
+                        <button string="Disconnect" name="action_disconnect" type="object" class="btn-warning" attrs="{'invisible': [('state', '!=', 'active')]}"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="api_setting_tree" model="ir.ui.view">
+            <field name="name">api.setting.tree</field>
+            <field name="model">api.settings</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="state"/>
+                    <field name="id_account"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem action="api_setting_form_action" parent="menu_convert_action" id="menu_form_api_setting" sequence="1"/>
+    
+    </data>
+    
+
+</odoo>

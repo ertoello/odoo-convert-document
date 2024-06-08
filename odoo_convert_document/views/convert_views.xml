@@ -1,0 +1,93 @@
+<odoo>
+  <data>
+        <record id="convert_form_action" model="ir.actions.act_window">
+            <field name="name">Convert File</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">convert.file</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                No Converted File found. Let's create one!
+              </p><p>
+                This module has been integrated with the API from the www.convertapi.com website. This module is still in development stage but can be used for several formats only.
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="convert_form_action" id="menu_convert_action" web_icon="odoo_convert_document,static/description/icon.png"/>
+
+        <record id="convert_file_form" model="ir.ui.view">
+            <field name="name">convert.file.form</field>
+            <field name="model">convert.file</field>
+            <field name="arch" type="xml">
+                <form>
+                  <sheet >
+                    <h1>
+                      <field name="name"/>
+                    </h1>
+                    <group name="form_convert_file" string="">
+                      <field name="api_id" domain="[('state', '=', 'active')]"/>
+                      <field name="convert_category" widget="radio" options="{'horizontal': true}"/>
+                    </group>
+                    <group col="2">
+                      <group string="From">
+                        <field name="from_format_document" attrs="{'invisible': [('convert_category', '!=', 'ms_office')]}"/>
+                        <field name="from_format_image" attrs="{'invisible': [('convert_category', '!=', 'img')]}"/>
+                        <!-- <field name="file_original" filename="filename_original" />
+                        <field name="filename_original" filename="filename_original" invisible="1"/> -->
+                      </group>
+                      <group string="To">
+                        <field name="to_format_document" attrs="{'invisible': [('convert_category', '!=', 'ms_office')]}"/>
+                        <field name="to_format_image" attrs="{'invisible': [('convert_category', '!=', 'img')]}"/>
+                        <!-- <field name="file_convert" readonly="1" filename="filename_convert" />
+                        <field name="filename_convert" filename="filename_convert" invisible="1"/> -->
+                      </group>
+                    </group>
+                    <button string="Convert" name="action_convert_button" type="object" class="oe_highlight" />
+                    <notebook>
+                      <page string="Convert">
+                        <field name="convert_line">
+                          <tree editable="bottom">
+                            <!-- <field name="date"/> -->
+                            <field name="file_original" filename="filename_original"/>
+                            <field name="filename_original" filename="filename_original"/>
+                            <field name="file_convert" filename="filename_convert" widget="binary" readonly="1"/>
+                            <field name="filename_convert" filename="filename_convert" invisible="1"/>
+                          </tree>
+                        </field>
+                      </page>
+                    </notebook>
+                  </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="convert_file_view_tree" model="ir.ui.view">
+            <field name="name">convert.file.view.tree</field>
+            <field name="model">convert.file</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="convert_category"/>
+                </tree>
+            </field>
+        </record>
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="ab_telegram_message" id="ab_telegram_message.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="ab_telegram_message.menu_1" parent="ab_telegram_message.menu_root"/>
+    <menuitem name="Menu 2" id="ab_telegram_message.menu_2" parent="ab_telegram_message.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="ab_telegram_message.menu_1_list" parent="ab_telegram_message.menu_1"
+              action="ab_telegram_message.action_window"/>
+    <menuitem name="Server to list" id="ab_telegram_message" parent="ab_telegram_message.menu_2"
+              action="ab_telegram_message.action_server"/>
+-->
+  </data>
+</odoo>

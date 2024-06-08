@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_convert_file_user,odoo_convert_document.convert.file,model_convert_file,base.group_user,1,1,1,1
+access_api_settings_user,odoo_convert_document.api.settings,model_api_settings,base.group_user,1,1,1,1
+access_convert_line_user,odoo_convert_document.convert.line,model_convert_line,base.group_user,1,1,1,1
